@@ -51,6 +51,23 @@ public class map : MonoBehaviour
         {
             for (int j = 0; j < gridSize; j++)
             {
+                GameObject sphere = _points[i, j].gameObject;
+                float cubeEdgeLeft = cube.transform.position.x - cube.transform.localScale.x / 2;
+                float cubeEdgeRight = cube.transform.position.x + cube.transform.localScale.x / 2;
+                float cubeEdgeTop = cube.transform.position.y + cube.transform.localScale.y / 2;
+                float cubeEdgeBottom = cube.transform.position.y - cube.transform.localScale.y / 2;
+                Point point = _points[i, j];
+                Vector3 pPosition = point.gameObject.transform.position;
+                if (pPosition.x + sphereSize / 2f >= cubeEdgeLeft && pPosition.x - sphereSize / 2f <= cubeEdgeRight &&
+                    pPosition.y + sphereSize / 2f >= cubeEdgeBottom && pPosition.y - sphereSize / 2f <= cubeEdgeTop)
+                {
+                    point.gameObject.SetActive(false);
+                }
+                else
+                {
+                    point.gameObject.SetActive(true);
+                }
+                
                 if (i != gridSize - 1)
                 {
                     Point p = _points[i, j];
@@ -76,22 +93,7 @@ public class map : MonoBehaviour
         {
             for (int j = 0; j < gridSize; j++)
             {
-                GameObject sphere = _points[i, j].gameObject;
-                float cubeEdgeLeft = cube.transform.position.x - cube.transform.localScale.x / 2;
-                float cubeEdgeRight = cube.transform.position.x + cube.transform.localScale.x / 2;
-                float cubeEdgeTop = cube.transform.position.y + cube.transform.localScale.y / 2;
-                float cubeEdgeBottom = cube.transform.position.y - cube.transform.localScale.y / 2;
-                Point p = _points[i, j];
-                Vector3 pPosition = p.gameObject.transform.position;
-                if (pPosition.x + sphereSize / 2f >= cubeEdgeLeft && pPosition.x - sphereSize / 2f <= cubeEdgeRight &&
-                    pPosition.y + sphereSize / 2f >= cubeEdgeBottom && pPosition.y - sphereSize / 2f <= cubeEdgeTop)
-                {
-                    p.gameObject.SetActive(false);
-                }
-                else
-                {
-                    p.gameObject.SetActive(true);
-                }
+                
             }
         }
     }
