@@ -4,13 +4,13 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class map : MonoBehaviour
+public class Map2D : MonoBehaviour
 {
     private Point[,] _points;
     private float _mapWidth, _mapLength;
-    [Range(0, 1)] public float gridWidthDensity;
+    public int gridWidthDensity;
     private int pointWidthCount, pointLengthCount;
-    [Range(0, .5f)] public float sphereSize;
+    private float sphereSize;
     public GameObject cube;
     public GameObject spherePrefab;
     private int[,] _shortPoints;
@@ -33,20 +33,16 @@ public class map : MonoBehaviour
     {
         _mapWidth = Mathf.Abs(endPoint.transform.position.x - startPoint.transform.position.x);
         _mapLength = Mathf.Abs(endPoint.transform.position.y - startPoint.transform.position.y);
-
-        int gridWCount = (int) (_mapWidth / gridWidthDensity);
-
-        int gridLCount = (int) (gridWCount * _mapLength / _mapWidth);
-
-        pointLengthCount = gridLCount + 1;
-        pointWidthCount = gridWCount + 1;
-
-        cellWidth = _mapWidth / gridWCount;
-        cellLength = _mapLength / gridLCount;
-
-        sphereSize = gridWidthDensity * sphereSize;
-
-
+       
+        int gridLengthDensity = (int) (gridWidthDensity * (_mapLength / _mapWidth));
+        sphereSize = 20 / (float)gridWidthDensity;
+        
+        pointLengthCount = gridLengthDensity + 1;
+        pointWidthCount = gridWidthDensity + 1;
+        
+        cellWidth = _mapWidth / gridWidthDensity;
+        cellLength = _mapLength / gridLengthDensity;
+        
         _points = new Point[pointWidthCount, pointLengthCount];
         CreateSphere();
     }
@@ -61,8 +57,8 @@ public class map : MonoBehaviour
                 {
                     Point p = _points[i, j];
                     Point p2 = _points[i + 1, j];
-                    if (p2.gameObject.GetComponent<MeshRenderer>().enabled &&
-                        p.gameObject.GetComponent<MeshRenderer>().enabled)
+                    if (p2.gameObject.GetComponent<SpriteRenderer>().enabled &&
+                        p.gameObject.GetComponent<SpriteRenderer>().enabled)
                         Debug.DrawLine(new Vector3(p.x, p.y, 0), new Vector3(p2.x, p2.y, 0), Color.white);
                 }
 
@@ -70,8 +66,8 @@ public class map : MonoBehaviour
                 {
                     Point p = _points[i, j];
                     Point p2 = _points[i, j + 1];
-                    if (p2.gameObject.GetComponent<MeshRenderer>().enabled &&
-                        p.gameObject.GetComponent<MeshRenderer>().enabled)
+                    if (p2.gameObject.GetComponent<SpriteRenderer>().enabled &&
+                        p.gameObject.GetComponent<SpriteRenderer>().enabled)
                         Debug.DrawLine(new Vector3(p.x, p.y, 0), new Vector3(p2.x, p2.y, 0), Color.white);
                 }
             }
@@ -99,12 +95,11 @@ public class map : MonoBehaviour
                 p.x = i * cellWidth + startPoint.transform.position.x;
                 p.y = j * cellLength + startPoint.transform.position.y;
                 _points[i, j] = p;
-                GameObject sphere = Instantiate(spherePrefab);
-                sphere.tag = "sphere";
-                sphere.transform.localScale = Vector3.one * sphereSize;
-                sphere.transform.position = new Vector3(p.x, p.y, 0);
-                sphere.isStatic = true;
-                p.gameObject = sphere;
+                GameObject circle = Instantiate(spherePrefab);
+                circle.tag = "sphere";
+                circle.transform.localScale = Vector3.one * sphereSize;
+                circle.transform.position = new Vector3(p.x, p.y, 0);
+                p.gameObject = circle;
             }
         }
     }
