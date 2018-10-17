@@ -1,4 +1,5 @@
-﻿﻿using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class map : MonoBehaviour
@@ -223,7 +224,7 @@ public class map : MonoBehaviour
         Slack(_points[0, 0]);
 
 
-        print("最终最短路径值: " + _points[3, 3].distanceFromStart);
+        print("最终最短路径值: " + _points[pointWidthCount - 1, pointLengthCount - 1].distanceFromStart);
     }
 
     /// <summary>
@@ -339,26 +340,23 @@ public class map : MonoBehaviour
             {
                 outPoint[i].distanceFromStart = distanceToNext;
             }
-
-            print(outPoint[i].distanceFromStart);
-
-            sortestPointDistance = Mathf.Min(outPoint[i].distanceFromStart, sortestPointDistance);
         }
 
-        //松弛之后找出最近点
-        if (sortestPointDistance != int.MaxValue)
+        var order = outPoint.OrderBy(x => x.distanceFromStart);
+        List<Point> newOutPoint = new List<Point>();
+        foreach (var p in order)
         {
-            for (int i = 0; i < outPoint.Count; i++)
+            newOutPoint.Add(p);
+        }
+
+        for (int i = 0; i < newOutPoint.Count; i++)
+        {
+            if (newOutPoint[i].isMark)
             {
-                if (outPoint[i].isMark)
-                    continue;
-                if (outPoint[i].distanceFromStart == sortestPointDistance)
-                {
-                    Slack(outPoint[i]);
-                }
+                continue;
             }
-            
-            
+
+            Slack(newOutPoint[i]);
         }
     }
 
