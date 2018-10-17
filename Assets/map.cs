@@ -13,7 +13,6 @@ public class map : MonoBehaviour
     [Range(0, .5f)] public float sphereSize;
     public GameObject cube;
     public GameObject spherePrefab;
-    private int[,] _shortPoints;
     public GameObject endPoint;
     public GameObject startPoint;
     private float cellWidth;
@@ -24,8 +23,14 @@ public class map : MonoBehaviour
         //坐标
         public float x;
         public float y;
+        public int indexX;
+        public int indexY;
         public GameObject gameObject;
-        public int shortPath;
+
+        public float distanceFromStart;
+
+        //已检查
+        public bool isMark;
     }
 
     // Use this for initialization
@@ -98,6 +103,8 @@ public class map : MonoBehaviour
                 Point p = new Point();
                 p.x = i * cellWidth + startPoint.transform.position.x;
                 p.y = j * cellLength + startPoint.transform.position.y;
+                p.indexX = i;
+                p.indexY = j;
                 _points[i, j] = p;
                 GameObject sphere = Instantiate(spherePrefab);
                 sphere.tag = "sphere";
@@ -111,6 +118,71 @@ public class map : MonoBehaviour
 
     private void CreateArray()
     {
+        for (int i = 0; i < pointWidthCount; i++)
+        {
+            for (int j = 0; j < pointLengthCount; j++)
+            {
+                //不统计初始点
+                if (i == 0 && j == 0)
+                {
+                    continue;
+                }
+
+                if (i == j)
+                {
+                    //自己到自己为距离为0
+                    _points[i, j].distanceFromStart = 0;
+                    continue;
+                }
+
+                //-1代表无限远
+                _points[i, j].distanceFromStart = -1;
+            }
+        }
+
+        //第一个点检查过
+        _points[0, 0].isMark = true;
+        Slack(_points[1, 0], 1);
+    }
+
+    private void Slack(Point point, float distanceFromStart)
+    {
+        int indexX = point.indexX;
+        int indexY = point.indexY;
+        List<Point> outPoint = new List<Point>();
+        if (indexX + 1 < pointWidthCount)
+        {
+            outPoint.Add(_points[indexX + 1, indexY]);
+        }
+
+        if (indexX - 1 >= 0)
+        {
+            outPoint.Add(_points[indexX - 1, indexY]);
+        }
+
+        if (indexY + 1 < pointWidthCount)
+        {
+            outPoint.Add(_points[indexX, indexY + 1]);
+        }
+
+        if (indexY - 1 >= 0)
+        {
+            outPoint.Add(_points[indexX, indexY - 1]);
+        }
+
+        //不考虑已经标记过的点
+        for (int i = 0; i < outPoint.Count; i++)
+        {
+            if (outPoint[i].isMark)
+            {
+                continue;
+            }
+
+            
+            
+        }
+        
+        
     }
 
     /// <summary>
