@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2cebd5f3-5dfb-4d62-94ac-1169e3918128" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/map.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/map.cs" afterDir="false" />
-    </list>
+    <list default="true" id="2cebd5f3-5dfb-4d62-94ac-1169e3918128" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,7 +12,7 @@
     <session id="-1592858852">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
+          <entry key="project.closed" value="3" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.2" value="2" />
           <entry key="project.opened" value="3" />
@@ -47,8 +45,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/map.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="383">
-              <caret line="178" column="13" lean-forward="true" selection-start-line="178" selection-start-column="13" selection-end-line="178" selection-end-column="13" />
+            <state relative-caret-position="363">
+              <caret line="177" column="25" lean-forward="true" selection-start-line="177" selection-start-column="25" selection-end-line="177" selection-end-column="25" />
               <folding>
                 <marker date="1539771139708" expanded="true" signature="6:130" ph="..." />
                 <marker date="1539771139708" expanded="true" signature="164:5593" ph="{...}" />
@@ -258,12 +256,12 @@
       <updated>1539755824117</updated>
       <workItem from="1539755825604" duration="109000" />
       <workItem from="1539755945772" duration="564000" />
-      <workItem from="1539756518975" duration="13875000" />
+      <workItem from="1539756518975" duration="13901000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14548000" />
+    <option name="totallyTimeSpent" value="14574000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -398,8 +396,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/map.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
-          <caret line="178" column="13" lean-forward="true" selection-start-line="178" selection-start-column="13" selection-end-line="178" selection-end-column="13" />
+        <state relative-caret-position="363">
+          <caret line="177" column="25" lean-forward="true" selection-start-line="177" selection-start-column="25" selection-end-line="177" selection-end-column="25" />
           <folding>
             <marker date="1539771139708" expanded="true" signature="6:130" ph="..." />
             <marker date="1539771139708" expanded="true" signature="164:5593" ph="{...}" />
