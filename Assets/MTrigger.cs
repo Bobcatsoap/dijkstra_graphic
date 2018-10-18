@@ -4,28 +4,28 @@ using UnityEngine;
 
 public class MTrigger : MonoBehaviour
 {
-    private MeshRenderer mesh;
+    public bool visiable;
 
     private void Awake()
     {
-        mesh = GetComponent<MeshRenderer>();
+        visiable = true;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("barrier"))
-            mesh.enabled = false;
+            visiable = false;
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("barrier") && mesh.enabled)
-            mesh.enabled = false;
+        if (other.CompareTag("barrier") && visiable)
+            visiable = false;
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("barrier"))
-            mesh.enabled = true;
+            visiable = true;
     }
 }
